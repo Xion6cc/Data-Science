@@ -47,9 +47,24 @@ Department
 4. Employee Salary Change Times 
 Ask to provide a table to show for each employee in a certain department how many times their Salary changes 
 
-
-
+SELECT employee_id, COUNT(*) AS salary_change
+FROM Employee_salary JOIN Employee USING (employee_id)
+JOIN Department USING (deparment_id)
+WHERE department = XXX
 
 5. Top 3 salary
 	Ask to provide a table to show for each department the top 3 salary with employee name 
 and employee has not left the company.
+
+
+SELECT employee_name, salary
+FROM
+(
+SELECT department_id, employee_name, salary, RANK() OVER(PARTITION BY department_id ORDER BY salary DESC) AS salary_rank
+FROM Department JOIN Employee USING (department_id)
+JOIN Employee_salary USING (employee_id)
+WHERE CURDATE() < term_date) AS A
+WHERE salary_rank < 4
+
+
+
