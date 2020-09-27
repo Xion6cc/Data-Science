@@ -17,9 +17,22 @@ Product line = each product belongs to a product line. You need group by product
 
 A. can you write a query to help find the employees. 
 
+SELECT employeeNumber
+FROM orderdetails JOIN orders USING (orderNumber)
+JOIN customers USING (customerNumber)
+JOIN employees ON customers.salesRepEmployeeNumber = employees.employeeNumber
+GROUP BY employeeNumber
+ORDER BY quantityOrdered * priceEach DESC
+LIMIT 3
+
 B. if we want to promote the employee to a manager, what do you think are the tables to be updated. 
 
-C. An employee is leaving the company, write a stored procedure to handle the case. 1). Make the current employee inactive, 2). Replaced with its manager employeenumber in order table. 
+employees
+
+C. An employee is leaving the company, write a stored procedure to handle the case. 
+	1). Make the current employee inactive
+	2). Replaced with its manager employeenumber in order table. 
+
 
 =======following challenge:
 Employee 
@@ -33,6 +46,9 @@ Department
 
 4. Employee Salary Change Times 
 Ask to provide a table to show for each employee in a certain department how many times their Salary changes 
+
+
+
 
 5. Top 3 salary
 	Ask to provide a table to show for each department the top 3 salary with employee name 
