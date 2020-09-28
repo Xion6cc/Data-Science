@@ -34,9 +34,24 @@ employees
 
 C. An employee is leaving the company, write a stored procedure to handle the case. 
 	1). Make the current employee inactive
+	
+	Create Procedure MakeInactive ( IN emp_id INT)
+	BEGIN
+	UPDATE empoloyees
+	SET
+	jobTitle = NULL WHERE id = p_id;
+	END
+
 	2). Replaced with its manager employeenumber in order table. 
+	
+	Create Procedure MakeInactive ( IN emp_id INT)
+	BEGIN
+	UPDATE customers, empolyees JOIN employees ON customers.salesRepEmployeeNumber = empolyees.employeeNumber
+	SET
+	salesRepEmployeeNumber = empolyees.reportsTo WHERE id = p_id;
+	END
 
-
+   
 =======following challenge:
 Employee 
 [employee_id, employee_name, gender, current_salary, department_id, start_date, term_date]
