@@ -12,6 +12,9 @@ LIMIT 3
 Profit margin= sum(profit if all sold) - sum(cost of each=buyPrice) / sum (buyPrice)
 Product line = each product belongs to a product line. You need group by product line. 
 
+SELECT productLine, SUM((MSRP - buyPrice) * quantityInStock) /SUM(MSRP * quantityInStock) AS profit_margin
+FROM products JOIN productlines USING (productLine)
+GROUP BY productLine
 
 3. company wants to award the top 3 sales rep They look at who produces the most sales revenue.
 
